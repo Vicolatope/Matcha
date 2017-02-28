@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row">
+	<div class="col-md-6 offset-md-3 col-sm-12">
+	<fieldset class="form-group">
+			<legend class="text-center">Create an account ..</legend>
+			<form action="/create" method="POST">
+				<div class="form-group text-center">
+					<input type="text" class="form-control text-center" name="email" aria-describedby="emailHelp" placeholder="Type your email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Type your email'">
+					<small id="emailHelp" class="form-text text-muted">We'll never share your mail with anyone</small>
+				</div>
+				<div class="form-group text-center">
+					<input type="password" class="form-control text-center" name="password" aria-describedby="passHelp" placeholder="Choose a secret password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Choose a secret password'">
+					<small id="passHelp" class="form-text text-muted">Min 6 char. at least a capital letter, a number and no special char.</small>
+				</div>
+				<div class="form-group text-center">
+					<input type="password" class="form-control text-center" name="passwordconfirm" placeholder="Confirm your password" onfocus="this.placeholder = ''" onblur="this.placeholder='Confirm your password'">
+				</div>
+				<div class="form-group text-center">
+					<label>You are</label>
+					<select class="form-control text-center" name="sex">
+						<option value="Man">a man</option>
+						<option value="Woman">a woman</option>
+					</select>
+				</div>
+				<div class="form-group text-center">
+					<label>looking for</label>
+					<select class="form-control text-center" name="preference">
+						<option value="Men">men</option>
+						<option value="Women">women</option>
+					</select>
+				</div>
+				<div class="form-group text-center">
+					<input type="submit" name="submit" value="Sign In">
+				</div>
+			</form>
+		</fieldset>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6 offset-md-3 col-sm-12">
+		<fieldset class="form-group">
+			<legend class="text-center">... or log in if you have one !</legend>
+			<form action="/login" method="POST">
+				<div class="form-group text-center">
+					<input type="text" class="form-control text-center" name="email" aria-describedby="emailHelp" placeholder="Type your email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Type your email'">
+				</div>
+				<div class="form-group text-center">
+					<input type="password" class="form-control text-center" name="password" aria-describedby="passHelp" placeholder="Type your secret password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Type your secret password'">
+				</div>
+				<div class="form-group text-center">
+					<input type="submit" name="submit" value="Log In">
+				</div>
+			</form>
+		</fieldset>
+	</div>
+</div>
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% for item in posts %}
+	<div class="col-sm-4 col-xs-4 col-lg-4">
+		<div class="card button-container no-radius profile-picture">
+			<div class="card-block-overlay text-center edit-button-wrapper" id="changePictureButton">
+				<button class="btn text-center no-radius edit-button"><i class="fa fa-trash" aria-hidden="true"></i></button>
+			</div>
+			{% if 'image' in item %}
+				<img class="card-img-top picture-profile no-radius" src="/image/{{item['image']}}">
+			{% endif %}
+			 <div class="card-block">
+				<p class="card-text">
+					{{item['content']}}
+				</p>
+			</div>
+		</div>
+	</div>
+{% endfor %}

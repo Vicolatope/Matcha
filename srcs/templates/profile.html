@@ -1,0 +1,132 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="row">
+	<div class="col-md-4 col-sm-6 col-xs-6 offset-md-1 col-lg-4">
+		<div class="card button-container no-radius">
+			<img type="image/png" class="picture-profile img-fluid no-radius card-img-top" src="{{profileImage}}">
+			<div class="card-block-overlay text-center edit-button-wrapper" id="changePictureButton">
+				<button class="btn text-center no-radius edit-button"><i id="changePictureIcon" class="fa fa-pencil" aria-hidden="true"></i></button>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-sm-6 col-xs-6">
+		<div class="card button-container no-radius">
+			<h3 class="card-title text-center">Profile infos</h3>
+			<div id="present-profile">
+				<div class="card-block">
+					<div class="text-center">
+						<h5>email</h5>
+						<span id="emailActual">{{email}}</span>
+					</div>
+				</div>
+				<div class="card-block">
+					<div class="text-center">
+						<h5>username</h5>
+						<span id="usernameActual">{{username}}</span>
+					</div>
+				</div>
+			</div>
+			<div id="edit-profile">
+				<div class="card-block">
+					<div class="input-group">
+				    	<span class="input-group-btn">
+							<button id="changeEmailButton" class="btn btn-secondary" type="button">Change email</button>
+						</span>
+						<input id="newMail" type="text" class="form-control" placeholder="{{email}}">
+					</div>
+				</div>
+				<div class="card-block">
+					<div class="input-group">
+				    	<span class="input-group-btn">
+							<button id="changeUserNameButton" class="btn btn-secondary" type="button">Change username</button>
+						</span>
+						<input id="newName" type="text" class="form-control" placeholder="{{username}}">
+					</div>
+				</div>
+			</div>
+			<div class="card-block-overlay text-center edit-button-wrapper">
+				<button id="editProfileButton" class="btn text-center no-radius edit-button"><i id="editProfileIcon" class="fa fa-pencil" aria-hidden="true"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-md-10 offset-md-1 text-center">
+		<h3>Your photos</h3>
+		<div id="posts-wrapper" class="row">
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+	$('#edit-profile').hide();
+	$('#editProfileButton').on('click', launchEdit)
+	function launchEdit() {
+
+		$('#present-profile').hide();
+		$('#edit-profile').show();
+		$('#editProfileIcon').attr('class', 'fa fa-times');
+		$('#editProfileButton').on('click', function () {
+			$('#present-profile').show();
+			$('#edit-profile').hide();
+			$('#editProfileIcon').attr('class', 'fa fa-pencil');
+			$('#editProfileButton').on('click', launchEdit);
+		});
+	}
+		$('#changeUserNameButton').on('click', function(){
+			var req = new XMLHttpRequest();
+			req.open('POST', '{{ url_for("editProfileHandler") }}');
+			req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			req.onreadystatechange = function() {
+			    if(req.readyState == 4 && req.status == 200) {
+			    	$('#newName').val('');
+			        if (req.responseText === 'error') {
+			        	$('#modalMessage').text('Something bad happened');
+			        	$('#myModal').modal('show');
+			        } else {
+			        	$('#usernameActual').text(req.responseText);
+			        	$('#newName').attr('placeholder', 'Updated successfully !');
+			        	setTimeout(function() {
+			        		$('#newName').attr('placeholder', req.responseText);
+			        	}, 2000);
+			        }
+			    }
+			}
+			req.send('username=' + $('#newName').val());
+
+		});
+		$('#changeEmailButton').on('click', function(){
+			var req = new XMLHttpRequest();
+			req.open('POST', '{{ url_for("editProfileHandler") }}');
+			req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			req.onreadystatechange = function() {
+			    if(req.readyState == 4 && req.status == 200) {
+			        	$('#newMail').val('');
+			        if (req.responseText === 'error') {
+			        	$('#modalMessage').text('Something bad happened');
+			        	$('#myModal').modal('show');
+			        	console.log($('#myModal').val());
+			        } else {
+			        	$('#emailActual').text(req.responseText);
+			        	$('#newMail').attr('placeholder', 'Updated successfully !');
+			        	setTimeout(function(){
+			        		$('#newMail').attr('placeholder', req.responseText);
+			        	}, 2000);
+			        }
+			    }
+			}
+			req.send('email=' + $('#newMail').val());
+		});
+		var requ = new XMLHttpRequest();
+		requ.open('GET', '/post_cheater');
+		requ.onreadystatechange = function() {
+		    if(requ.readyState == 4 && requ.status == 200) {
+		    	console.log(requ.responseText);
+		    	$('#posts-wrapper').html(requ.responseText);
+		    }
+		}
+		requ.send()
+
+</script>
+{% endblock %}

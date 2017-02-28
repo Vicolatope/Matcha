@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Matcha</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/bootstrap-grid.min.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+	<script
+		src="https://code.jquery.com/jquery-3.1.1.min.js"
+		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		crossorigin="anonymous"></script>
+			<link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet">
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}" type="text/javascript"></script> 
+</head>
+<body>
+	<div class="jumbotron header-wrapper">
+		<h1 class="header text-center">{% if title %} {{title}} {% else %}Welcome{% endif %}</h1>
+		{% if session.get('logged_in') == True %}
+			{% block navbar %}
+		<nav class="nav main-nav">
+		  <div class="main-nav-item nav-item">
+		    <a class="main-nav-link nav-link" href="/">Home</a>
+		  </div>
+		  <div class="nav-item main-nav-item">
+		    <a class="main-nav-link nav-link" href="/matches">Matches</a>
+		  </div>
+		  <div class="nav-item main-nav-item">
+		    <a class="main-nav-link nav-link" href="/profile">Profile</a>
+		  </div>
+		  <div class="nav-item main-nav-item">
+		    <a class="main-nav-link nav-link" href="/logout">Logout</a>
+		</nav>
+			{% endblock %}
+		{% endif %}
+	</div>
+	<div id="mainWrapper" class="container-fluid">
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content text-center">
+						<div class="modal-header">
+							<h5 class="modal-title text-center" id="exampleModalLabel">Error</h5>
+							<button type="button" class="close" onclick="$('#myModal').modal('hide')" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div id="modalMessage" class="modal-body">
+						{% with messages = get_flashed_messages() %}
+							{% if messages %}
+								{% for message in messages %}
+									{{message}}
+								{% endfor %}
+							{% endif %}
+						{% endwith %}
+						</div>
+					</div>
+				</div>
+			</div>	
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}		
+					<script>
+						$('#myModal').modal('show');
+					</script>
+				{% endif %}
+			{% endwith %}
+		{% block content %}{% endblock %}
+	</div>
+	{% if session.get('logged_in') == True %}
+		{% block footer %}
+		<nav class="navbar navbar-toggleable-md fixed-bottom navbar-light bg-faded">
+			<div class="btn-group dropup nav-item chat-button no-radius">
+				<button type="button" class="btn btn-secondary no-radius dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span><i class="fa fa-comments"></i></span>
+				</button>
+				<div id="chat_container" class="dropdown-menu no-radius">
+				<!-- Dropdown menu links -->
+					<div id="chatterModel" class="dropdown-item">
+					</div>
+				</div>
+			</div>
+			<div id="currentChatModel" class="btn-group dropup chatting-wrapper nav-item">
+				<button type="button" class="btn btn-secondary no-radius dropdown-toggle on-chat-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				</button>
+				<div id="chatWrapperModel" class="dropdown-menu no-radius one-chat-wrapper">
+					<div class="messages-wrapper">
+						<div id="one-message-model" class="message">
+							<div class="message-emitter"></div>
+							<div class="one-message-content"></div>
+						</div>
+					</div>
+					<div class="input-group no-radius">
+						<span class="input-group-btn">
+							<button class="btn btn-secondary send-message-button no-radius" type="button">Go!</button>
+						</span>
+						<textarea type="text" class="form-control no-radius message-content" placeholder="Message .."></textarea>
+					</div>
+				</div>
+			</div>
+			<div id="currentChatsWrapper">
+			</div>
+		</nav>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/chat.js') }}"></script>
+		{% endblock %}
+	{% endif %}
+</body>
+{% block script %}{% endblock %}
+</html>

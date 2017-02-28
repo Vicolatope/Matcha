@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="row">
+	<div class="col-xs-12 col-md-10 offset-md-1 text-center">
+		<h3>Who's here ?</h3>
+		<div id="proposals-wrapper" class="row">
+		{% for item in posts %}
+			<div id="{{item['id']}}" class="col-xs-4 col-sm-4 col-md-4">
+				<div class="present_users card button-container no-radius profile-picture posts_class">
+					<div class="present_users_infos">
+						<p class="present_users_text card-text">By {{item['username']}}</p>
+						<div class="card-block present-button-wrapper text-center">
+								<button class="btn btn-default like_button" onclick="sendALike({{item['user_id']}}, {{item['id']}});"><i class="fa fa-heart" aria-hidden="true"></i></button>
+							<a href="/user/{{item['user_id']}}">
+								<button class="btn btn-default profile_button"><i class="fa fa-user" aria-hidden="true"></i></button>
+							</a>
+						</div>
+					</div>
+						{% if 'image' in item %}
+							<img class="card-img-top picture-profile no-radius" src="/image/{{item['image']}}">
+						{% endif %}
+					<!-- <div class="card-block content-block">
+						<p class="card-text">
+							{{item['content']}}
+						</p>
+					</div> -->
+				</div>
+			</div>
+		{% endfor %}
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-md-10 offset-md-1 text-center">
+		<h3>Your Matches</h3>
+	</div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+function sendALike(user_id, card_id) {
+	var likeRequest = new XMLHttpRequest();
+	likeRequest.open('GET', '/like_user/' + user_id);
+	likeRequest.onreadystatechange = function() {
+		if (likeRequest.readyState == 4 && likeRequest.status == 200) {
+
+			if (this.responseText === 'match') {
+				$('#modalMessage').text('It\'s a Match !');
+				$('#myModal').modal('show');
+			}
+			$(card_id).hide();
+		}
+	}
+	likeRequest.send();
+}
+</script>
+{% endblock %}

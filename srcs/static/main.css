@@ -1,0 +1,172 @@
+.vertical-align {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+
+.button-container:hover > .edit-button-wrapper, .button-container:focus > .edit-button-wrapper {
+	display: inline-block;
+}
+
+.picture-profile {
+	max-width: 100%;
+	height:auto;
+}
+
+.user-photos-wrapper {
+	margin-top: 2rem;
+}
+
+#chatterModel {
+	display: none;
+}
+
+#currentChatModel {
+	display: none;
+}
+
+.chat-button button {
+	border: 1px solid black;
+}
+
+.chatting-wrapper {
+	margin-left: 1rem;
+}
+
+.chatting-wrapper button {
+	border: 1px solid black;
+}
+
+body {
+	background-color: #EFEFEF;
+}
+
+img {
+	width: 100% !important;
+	height: auto !important;
+}
+
+
+.like_button {
+	border: 2px solid #ff4d4d;
+	background-color: transparent;
+	color: #ff4d4d;
+}
+
+.like_button:hover {
+	background-color: #ff4d4d;
+	color: white;
+}
+
+.profile_button:hover {
+	color: white;
+	background-color: green;
+}
+
+.profile_button {
+	background-color: transparent;
+	border: 2px solid green;
+	color: green;
+}
+
+.one-chat-wrapper {
+	width: 200%;
+}
+
+.present_users_infos {
+	z-index: 10;
+	width: 100%;
+	height:100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	display: none;
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
+.present_users:hover  .present_users_infos {
+	display: block;
+	/*color: #e5e5e5;*/
+}
+
+.no-border {
+	border: none !important;
+}
+`
+.button-container {
+	position: relative;
+}
+
+.edit-button-wrapper {
+	display:none;
+	position: absolute;
+	background: transparent;
+	right: 0px;
+	top: 0px;
+
+}
+
+.posts_class {
+	margin-top: 1rem;
+}
+
+.posts-wrapper {
+	overflow: auto;
+}
+
+.no-radius {
+	border-radius: 0;
+}
+
+.header-wrapper {
+	position: relative;
+	background-color: white;
+}
+
+
+
+.main-nav {
+	position: absolute;
+	bottom: 0px;
+}
+
+.text-on-right {
+	float: right;
+}
+
+.edit-button {
+	background: transparent;
+	border: none;
+}
+
+.button-container {
+	position: relative;
+}
+
+.main-nav-link {
+	color: black;
+}
+
+.main-nav-item {
+	border: 1px solid white;
+}
+
+.main-nav-item:hover {
+	border: 1px solid #CAEBF2;
+}
+
+.main-nav-item:hover .main-nav-link {
+	color: black;
+}
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('fonts/glyphicons-halflings-regular.eot');
+  src: url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('fonts/glyphicons-halflings-regular.woff') format('woff'), url('fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+
+.button-centred {
+	position: absolute;
+	left: 50%;
+}
