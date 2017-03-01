@@ -1,5 +1,6 @@
 from GDSession import GDSession
 from inputVerify import *
+import time
 
 class User():
 
@@ -95,12 +96,26 @@ class User():
 			resList.append({'username': match['username'], 'id': match['id']})
 		return resList
 
+	def lastMessagesWith(self, other_id):	
+		resList = []
+		result = GDSession().run('MATCH (a:Person)-[:CHAT]->(f:Message)<-[:CHAT]-(b:Person) , (f)-[:LAST_MESSAGE]->(l:Message), (l)<-[:NEXT*..10]-(m:Message) WHERE ID(a) = {id} AND ID(b) = {otherId} RETURN m.content AS content, m.at AS at, m.from AS from ORDER BY m.at',
+			{'id': self._user_id, 'otherId': other_id})
+		for message in result:
+			if message['at'] != None and message['content'] != None:
+				resList.append({'content': message['content'], 'at': message['at'], 'from': message['from']})
+		return resList
+
+
+	def storeMessageTo(self, to, message):
+		GDSession().run('MATCH (a:Person)-[:CHAT]->(f:Message)<-[:CHAT]-(b:Person), (f)-[l:LAST_MESSAGE]->(c:Message) WHERE ID(a) = {id} AND ID(b) = {otherId} DELETE l CREATE (c)-[:NEXT]->(n:Message {at: {at}, content: {content}, from: {id}}), (f)-[:LAST_MESSAGE]->(n)',
+			{'id': self._user_id, 'otherId': to, 'content': message, 'at': time.time()})
+
 	def likeUser(self, otherId):
 		result = GDSession().run('MATCH (a:Person), (b:Person) WHERE ID(b) = {otherId} AND ID(a) = {id} OPTIONAL MATCH (b)-[r:LIKED]->(a) MERGE (a)-[d:LIKED]->(b) RETURN r AS isMatch',
 			{'id': self._user_id, 'otherId': otherId})
 		for res in result:
 			if res['isMatch'] != None:
-				GDSession().run('MATCH (a:Person)-[l:LIKED]->(b:Person), (b)-[r:LIKED]->(a) WHERE ID(a) = {otherId} AND ID(b) = {id} SET r.match = true, l.match = true',
+				GDSession().run('MATCH (a:Person)-[l:LIKED]->(b:Person), (b)-[r:LIKED]->(a) WHERE ID(a) = {otherId} AND ID(b) = {id} SET r.match = true, l.match = true MERGE (a)-[:CHAT {with: {id}}]->(m:Message)<-[:CHAT {with: {otherId}}]-(b) MERGE (m)-[:LAST_MESSAGE]->(m)',
 					{'id' : self._user_id, 'otherId' : otherId})
 				return True
 			else:

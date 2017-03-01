@@ -73,7 +73,7 @@
 		{% block footer %}
 		<nav class="navbar navbar-toggleable-md fixed-bottom navbar-light bg-faded">
 			<div class="btn-group dropup nav-item chat-button no-radius">
-				<button type="button" class="btn btn-secondary no-radius dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<button type="button" class="btn btn-secondary no-radius dropdown-toggle converse-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<span><i class="fa fa-comments"></i></span>
 				</button>
 				<div id="chat_container" class="dropdown-menu no-radius">
@@ -85,22 +85,25 @@
 			<div id="currentChatModel" class="btn-group dropup chatting-wrapper nav-item">
 				<button type="button" class="btn btn-secondary no-radius dropdown-toggle on-chat-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				</button>
-				<div id="chatWrapperModel" class="dropdown-menu no-radius one-chat-wrapper">
-					<div class="messages-wrapper">
-						<div id="one-message-model" class="message">
-							<div class="message-emitter"></div>
-							<div class="one-message-content"></div>
-						</div>
+				<div class="dropdown-menu no-radius one-chat-wrapper" >
+					<div class="messages-wrapper justify-content-center">
+						
 					</div>
 					<div class="input-group no-radius">
+						<textarea type="text" class="form-control no-radius message-content" placeholder="Message .."></textarea>
 						<span class="input-group-btn">
 							<button class="btn btn-secondary send-message-button no-radius" type="button">Go!</button>
 						</span>
-						<textarea type="text" class="form-control no-radius message-content" placeholder="Message .."></textarea>
 					</div>
 				</div>
 			</div>
 			<div id="currentChatsWrapper">
+			</div>
+			<div id="one-message-model">
+						<div class="message card no-radius">
+							<p class="message-emitter card-subtitle"></p>
+							<div class="one-message-content card-text"></div>
+						</div>
 			</div>
 		</nav>
 		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>

@@ -4,6 +4,9 @@
 	height: 100%;
 }
 
+.profile-main-pictue {
+	padding: 1rem;
+}
 
 .button-container:hover > .edit-button-wrapper, .button-container:focus > .edit-button-wrapper {
 	display: inline-block;
@@ -12,6 +15,10 @@
 .picture-profile {
 	max-width: 100%;
 	height:auto;
+}
+
+#one-message-model {
+	display: none;
 }
 
 .user-photos-wrapper {
@@ -26,7 +33,17 @@
 	display: none;
 }
 
-.chat-button button {
+/*.chat-button button {
+	border: 1px solid black;
+}
+*/
+
+.profile-picture {
+	padding: 1rem;
+}
+
+
+.one-chat-wrapper {
 	border: 1px solid black;
 }
 
@@ -34,7 +51,29 @@
 	margin-left: 1rem;
 }
 
-.chatting-wrapper button {
+.on-chat-button,  .converse-button {
+	border: 1px solid black;
+}
+
+.messages-wrapper {
+	max-height: 20rem;
+	overflow: auto;
+	padding: 0.2rem;
+}
+
+/*.chatting-wrapper button {
+	border: 1px solid black;
+}
+*/
+
+.one-chat-wrapper {
+	background: #EFEFEF;
+}
+
+.message {
+	/*border-bottom: 1px solid black;*/
+	padding: 0.5rem;
+	margin-bottom: 1rem;
 	border: 1px solid black;
 }
 
@@ -102,8 +141,8 @@ img {
 	display:none;
 	position: absolute;
 	background: transparent;
-	right: 0px;
-	top: 0px;
+	right: 1rem;
+	top: 1rem;
 
 }
 

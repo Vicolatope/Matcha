@@ -65,7 +65,11 @@ def handle_event(data):
 def messageSender(data):
 	user = User(session.get('user_id'))
 	lock.acquire()
-	socketio.emit('received', {'message': data['content'], 'from': user.user_id}, room=socketConnections[data['id']])
+	if data['id'] in socketConnections:
+		socketio.emit('received', {'message': data['content'], 'from': user.user_id}, room=socketConnections[data['id']])
+		user.storeMessageTo(data['id'], data['content'])
+	else:
+		user.storeMessageTo(data['id'], data['content'])
 	lock.release()
 	print(data);
 
@@ -82,12 +86,17 @@ def cheatPosts():
 	posts = render_template('posts.html', posts=user.getAllPosts())
 	return posts
 
+@app.route('/test')
+def test():
+	return json.dumps(User(session.get('user_id')).lastMessagesWith(38))
+
 @app.route('/load_chat')
 def loadChatResponder():
 	if check_connection() == False:
 		return
 	user = User(session.get('user_id'))
 	matches = user.getAllMatches()
+	matches.append({'my_id': user.user_id})
 	return json.dumps(matches)
 
 #
@@ -219,6 +228,17 @@ def finalizeRoute():
 	else:
 		flash('Missing value')
 		return redirect('/verify/%s' % session.get('verify'))
+
+@app.route('/last_messages/<int:user_id>')
+def getUserLastMessageRoute(user_id):
+	if check_connection() == False:
+		return redirect(url_for('indexRoute'))
+	user = User(session.get('user_id'))
+	try:
+		messagesList = user.lastMessagesWith(user_id)
+	except:
+		messagesList = []
+	return json.dumps(messagesList)
 
 @app.route('/profile')
 def profileRoute():
