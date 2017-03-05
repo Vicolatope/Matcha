@@ -18,8 +18,12 @@
 	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}" type="text/javascript"></script> 
 </head>
 <body>
-	<div class="jumbotron header-wrapper">
-		<h1 class="header text-center">{% if title %} {{title}} {% else %}Welcome{% endif %}</h1>
+	<div class="jumbotron header-wrapper justify-content-center">
+		<div class="raw">
+			<div class="col-sm-6 offset-sm-3 col-md-4 offset-md-4">
+				<img src="{{url_for('static', filename='logo.png')}}" class="image-logo">
+			</div>
+		</div>
 		{% if session.get('logged_in') == True %}
 			{% block navbar %}
 		<nav class="nav main-nav">
