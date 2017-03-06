@@ -93,7 +93,7 @@ def test():
 @app.route('/load_chat')
 def loadChatResponder():
 	if check_connection() == False:
-		return
+		return 'error'
 	user = User(session.get('user_id'))
 	matches = user.getAllMatches()
 	matches.append({'my_id': user.user_id})
@@ -263,16 +263,17 @@ def verifyRoute(verify_id):
 
 @app.route('/create', methods=['POST'])
 def createRoute():
+	# return json.dumps(request.form)
 	if ('email' in request.form and
 		'password' in request.form and
 		'passwordconfirm' in request.form and
 		'sex' in request.form and
-		'preference' in request.form):
+		'search' in request.form):
 		email = request.form['email']
 		password = request.form['password']
 		passwordconfirm = request.form['passwordconfirm']
 		sex = request.form['sex']
-		preference = request.form['preference']
+		preference = request.form['search']
 		error = verify_create_form(email, password, passwordconfirm)
 		if error is not None:
 			flash(error)

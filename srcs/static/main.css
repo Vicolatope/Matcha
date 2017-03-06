@@ -20,6 +20,7 @@
 	padding: 10px 10px 5px 10px;
 	transform: translate(-50%, -50%);
 	color: white;
+	font-family: 'Manifesto';
 }
 
 .sign-up-form::before {
@@ -37,6 +38,10 @@
 	background-color: rgba(255, 255, 255, 0.5);
 	padding: 3px;
 	border: 6px solid #ff4d4d;
+}
+
+.completion-form-lead {
+	margin-top: 5rem;
 }
 
 .sign-in-form > legend {
@@ -68,8 +73,23 @@
 	color: white;
 }
 
+.sign-up-button-inverse {
+	border: 3px solid #ff4d4d;
+	background: linear-gradient(to bottom, #ff4d4d 50%, white 50%);
+	background-size: 100% 200%;
+	background-position: bottom;
+	color: #ff4d4d;
+	transition: all 0.2s ease;
+	padding: 5px;
+}
+
+.sign-up-button-inverse:hover {
+	background-position: top;
+	color: white;
+}
+
 .sign-progress-wrapper {
-	margin-top: 40px;
+	margin-top: 4rem;
 	width: 125%;
 }
 
@@ -86,6 +106,132 @@
 	/*color: blue;*/
 }
 
+.check-box-wrapper {
+	display: inline-block !important;
+	/*border: 1px solid black;*/
+	position: relative;
+	padding-top: 15px;
+	background-color: transparent;
+	margin-top: 1rem;
+}
+
+.check-box-wrapper label {
+	color: rgba(255, 77, 77, 0.7);
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+	.check-box-wrapper label{
+		font-size: 12px;
+	}
+}
+
+.check-box-wrapper label:focus {
+	outline: none;
+}
+
+.check-box-wrapper label::after {
+	border: 3px solid rgba(255, 77, 77, 0.5);
+	height: 100%;
+	width: 80%;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	content: '';
+	z-index: -1;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+.check-box-wrapper label::before {
+	background: linear-gradient(to right, #ff4d4d 50%, transparent 50%);
+	border: 3px solid rgba(255, 77, 77, 0.5);
+	/*margin-top: 5%;*/
+	/*margin-bottom: 5%;*/
+	height: 60%;
+	width: 30px;
+	background-size: 400% 100%;
+	background-position: top right;
+	position: absolute;
+	top: 20%;
+	right: 0.4rem;
+	/*bottom: 0.2rem;*/
+	content: '';
+	z-index: 1;
+	transition: background-position 0.2s ease;
+}
+
+.check-box-wrapper input:checked + label {
+	color: #ff4d4d;
+}
+
+.check-box-wrapper input:checked + label::before, .check-box-wrapper input:checked + label::after{
+	border: 3px solid #ff4d4d;
+}
+
+.check-box-wrapper input:checked + label::before {
+	background-position: top left;
+}
+
+.check-box-wrapper input {
+	position: absolute;
+	left: -99999px;
+}
+
+.form-header {
+	clear: both;
+	position: relative;
+	padding: 10px;
+	color: #ff4d4d;
+}
+
+.form-header::before {
+	width: 30%;
+	height: 3px;
+	background-color: #ff4d4d;
+	content: '';
+	color: blue;
+	position: absolute;
+	z-index: 3;
+	top: 0px;
+	right:35%;
+}
+
+.form-header::after {
+	width: 30%;
+	height: 3px;
+	background-color: #ff4d4d;
+	content: '';
+	color: blue;
+	position: absolute;
+	z-index: 2;
+	bottom:2;
+	right:35%;
+}
+
+#sign-1-wrapper {
+	margin-top: 9rem;
+	display: none;
+}
+
+#sign-2-wrapper {
+	margin-top: 9rem;
+	display: none;
+}
+
+#sign-3-wrapper {
+	margin-top: 9rem;
+	/*display: none;*/
+}
+
+#complete-wrapper {
+	margin-top: 9rem;
+	display: none;
+}
+
+.sign-progress li {
+	color: rgba(255, 77, 77, 0.5);
+}
+
 .sign-progress li::before {
 	width: 30px;
 	height: 30px;
@@ -98,6 +244,15 @@
 	margin: 0 auto 10px auto;
 	border-radius: 50%;
 	background-color: white;
+}
+
+.sign-progress li.active {
+	color: #ff4d4d;
+}
+
+.sign-progress li.complete {
+	color: #ff4d4d;
+	font-weight: thin;
 }
 
 .sign-progress li.complete::before {
@@ -132,10 +287,6 @@
 
 .sign-progress li:first-child::after {
 	content: none;
-}
-
-#sign-2-wrapper {
-	display: none;
 }
 
 .vertical-align {
@@ -309,6 +460,7 @@ body {
 	background-color: white;
 	border-bottom: 6px solid #ff4d4d;
 	border-radius: 0;
+	margin-bottom: 4rem;
 }
 
 
@@ -336,11 +488,15 @@ body {
 }
 
 .main-nav-item {
-	border: 1px solid white;
+	border-top: 3px solid white;
 }
 
+
+
 .main-nav-item:hover {
-	border: 1px solid #CAEBF2;
+	border-top: 3px solid #ff4d4d;
+	border-radius: 0;
+
 }
 
 .main-nav-item:hover .main-nav-link {
@@ -351,6 +507,11 @@ body {
   font-family: 'Glyphicons Halflings';
   src: url('fonts/glyphicons-halflings-regular.eot');
   src: url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('fonts/glyphicons-halflings-regular.woff') format('woff'), url('fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+
+@font-face {
+	font-family: 'Manifesto';
+	src: url('fonts/MANIFESTO.ttf');
 }
 
 .button-centred {

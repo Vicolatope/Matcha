@@ -2,10 +2,10 @@
 {% block content %}
 <div class="row">
 	<div class="col-md-6 offset-md-3 col-sm-12">
-	<fieldset class="form-group">
-		<legend class="text-center">Last step .. a last effort !</legend>
+	<fieldset class="form-group sign-up-form completion-form">
+		<div class="text-center form-legend"><h5>Last step .. a last effort !</h5></div>
 		<form action="/finalize" method="POST" enctype="multipart/form-data">
-			<div class="form-group text-center">
+			<div class="form-group text-center completion-form-lead">
 				<label class="text-center">Choose a password others users will see ..</label>
 				<input type="text" class="form-control text-center" name="username" placeholder="Choose a pseudo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Choose a pseudo'">
 			</div>
