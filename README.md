@@ -5,3 +5,5 @@ Projet Web realies avec Flask, un mini-framework python. Ce projet consiste en l
 - Un systeme de chat rendu possible grace a l'utilisation de socketIO
 - Une interface dynamique avec jquery
 - Utilisation avancee de CSS3 pour le style
+
+--> Projet en cours de realisation
