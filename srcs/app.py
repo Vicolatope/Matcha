@@ -3,6 +3,7 @@ import re
 import hashlib
 import sys
 import time
+import datetime
 import os
 from threading import Lock
 from User import User
@@ -266,30 +267,53 @@ def createRoute():
 	# return json.dumps(request.form)
 	if ('email' in request.form and
 		'password' in request.form and
-		'passwordconfirm' in request.form and
+		'passconfirm' in request.form and
 		'sex' in request.form and
-		'search' in request.form):
+		'search' in request.form and
+		'firstname' in request.form and
+		'lastname' in request.form and
+		'birthdate' in request.form and
+		'movies' in request.form and
+		'music' in request.form and
+		'food' in request.form and
+		'bed' in request.form and
+		'books' in request.form and
+		'sport' in request.form):
 		email = request.form['email']
 		password = request.form['password']
-		passwordconfirm = request.form['passwordconfirm']
+		passconfirm = request.form['passconfirm']
 		sex = request.form['sex']
+		firstname = request.form['firstname']
+		lastname = request.form['lastname']
 		preference = request.form['search']
-		error = verify_create_form(email, password, passwordconfirm)
+		likes = {'Music': request.form['music'], 'Movies': request.form['movies'], 'Books': request.form['books'], 'Sport': request.form['sport'], 'Bed': request.form['bed'], 'Food': request.form['food']}
+		print(email)
+		error = verify_create_form(email, password, passconfirm)
 		if error is not None:
-			flash(error)
-			return redirect(url_for('indexRoute'))
+			return error
+		try:
+			birthdate = time.mktime(datetime.datetime.strptime(request.form['birthdate'], "%d/%m/%Y").timetuple())
+			if (birthdate < 23652000):
+				return 'You\'re too young for that !'
+		except:
+			return 'Wrong date format you should use dd/mm/yyyy'
 		try:
 			verify = verify_generate(email)
-			GDSession().run('CREATE (a:Person:%s {email: {email}, password: {password}, search: {preference}, verify: {verify}})' % ('Woman' if sex == 'Woman' else 'Man'),
-				{'email' : email, 'password' : password, 'preference': preference, 'verify': verify})
+			idReturn = GDSession().run('CREATE (a:Person:%s {email: {email}, password: {password}, search: {preference}, verify: {verify}, birthdate:{birthdate}, firstname: {firstname}, lastname:{lastname}}) RETURN ID(a) AS id' % ('Woman' if sex == 'woman' else 'Man'),
+				{'email' : email, 'password' : password, 'preference': preference, 'verify': verify, 'birthdate': birthdate, 'firstname': firstname, 'lastname': lastname})
+			user_id = list(idReturn)[0]['id']
+			for interest in likes:
+				if likes[interest] == 'on':
+					GDSession().run('MATCH (a:Person), (i:Interest) WHERE ID(a) = {user_id} AND i.name = {interestName} CREATE (a)-[c:LIKES]->(i)',
+						{'user_id': user_id, 'interestName': interest})
+				else:
+					print('I dont like %s', likes[interest])
 			send_verify_email(email, verify)
-			return redirect(url_for('waitVerifyRoute'))
+			return 'success'
 		except Exception as e:
-			flash('Email already used')
-			return redirect(url_for('indexRoute'))
+			return 'Email already used'
 	else:
-		flash('Missing values')
-		return redirect(url_for('indexRoute'))
+		return 'Missing values'
 
 if __name__ == '__main__':
 	socketio.run(app)

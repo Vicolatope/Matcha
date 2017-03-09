@@ -38,6 +38,7 @@
 	background-color: rgba(255, 255, 255, 0.5);
 	padding: 3px;
 	border: 6px solid #ff4d4d;
+	margin-top: 4rem;
 }
 
 .completion-form-lead {
@@ -65,10 +66,10 @@
 	background-position: top;
 	color: #ff4d4d;
 	transition: all 0.2s ease;
-	padding: 5px;
 }
 
 .sign-up-button:hover {
+	box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
 	background-position: bottom;
 	color: white;
 }
@@ -80,7 +81,6 @@
 	background-position: bottom;
 	color: #ff4d4d;
 	transition: all 0.2s ease;
-	padding: 5px;
 }
 
 .sign-up-button-inverse:hover {
@@ -90,7 +90,7 @@
 
 .sign-progress-wrapper {
 	margin-top: 4rem;
-	width: 125%;
+	width: 120%;
 }
 
 .sign-progress {
@@ -121,8 +121,22 @@
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+	/* fix checkbox font size*/
 	.check-box-wrapper label{
 		font-size: 12px;
+	}
+	/* fix log in button position*/
+	.nav-item > a > .sign-up-button {
+		position: absolute;
+		top: 30px;
+	}
+
+	.sign-progress-wrapper{
+		 width: 110%;
+	}
+
+	.sign-up-form {
+		margin-top: 2.5rem;
 	}
 }
 
@@ -142,22 +156,37 @@
 	background-color: rgba(255, 255, 255, 0.5);
 }
 
+fieldset {
+	box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
+}
+
 .check-box-wrapper label::before {
-	background: linear-gradient(to right, #ff4d4d 50%, transparent 50%);
+	background: linear-gradient(to right, rgba(255, 77, 77, 0.5) 50%, transparent 50%);
 	border: 3px solid rgba(255, 77, 77, 0.5);
+	border-top: 3px solid rgba(255, 77, 77, 0.75);
+	border-bottom: 3px solid rgba(255, 77, 77, 0.75);
 	/*margin-top: 5%;*/
 	/*margin-bottom: 5%;*/
 	height: 60%;
+	border-radius: none;
 	width: 30px;
-	background-size: 400% 100%;
+	background-size: 200% 100%;
 	background-position: top right;
 	position: absolute;
 	top: 20%;
 	right: 0.4rem;
 	/*bottom: 0.2rem;*/
 	content: '';
-	z-index: 1;
-	transition: background-position 0.2s ease;
+	z-index: 0;
+	transition: background-position 0.15s ease;
+}
+
+input:focus {
+	box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.check-box-wrapper:hover label::after {
+	box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .check-box-wrapper input:checked + label {
@@ -169,6 +198,7 @@
 }
 
 .check-box-wrapper input:checked + label::before {
+	/*background-color: #ff4d4d;*/
 	background-position: top left;
 }
 
@@ -210,7 +240,7 @@
 
 #sign-1-wrapper {
 	margin-top: 9rem;
-	display: none;
+	/*display: none;*/
 }
 
 #sign-2-wrapper {
@@ -220,7 +250,11 @@
 
 #sign-3-wrapper {
 	margin-top: 9rem;
-	/*display: none;*/
+	display: none;
+}
+
+#sign-input-wrapper {
+	margin-top: 4rem;
 }
 
 #complete-wrapper {

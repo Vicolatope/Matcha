@@ -1,150 +1,275 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="row">
-	<div class="col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
-		<fieldset class="form-group sign-up-form">
-				<div class="text-center form-legend"><h5>Create an account ..</h5></div>
-				<div class="sign-progress-wrapper">
-					<ul class="sign-progress">
-						<li id="step-1-pro" class="active"><i class="fa fa-id-card" aria-hidden="true"></i></li>
-						<li id="step-2-pro"><i class="fa fa-heart" aria-hidden="true"></i></li>
-						<li id="step-3-pro"><i class="fa fa-star" aria-hidden="true"></i></li>
-					</ul>
-				</div>
-			<form action="/create" method="POST">
-				<div id="sign-1-wrapper">
-					<div class="form-group col-sm-12">
-						<div class="text-center form-header">
-							<h5>Basic stuffs ..</h5>
+<div id="sign-up-form-wrapper">
+	<div class="row">
+		<div class="col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
+			<fieldset class="form-group sign-up-form">
+					<div class="text-center form-legend"><h5>Create an account ..</h5></div>
+					<div class="sign-progress-wrapper">
+						<ul class="sign-progress">
+							<li id="step-1-pro" class="active"><i class="fa fa-id-card" aria-hidden="true"></i></li>
+							<li id="step-2-pro"><i class="fa fa-heart" aria-hidden="true"></i></li>
+							<li id="step-3-pro"><i class="fa fa-star" aria-hidden="true"></i></li>
+						</ul>
+					</div>
+				<form id="create-form" action="/create" method="POST">
+					<div id="sign-1-wrapper">
+						<div class="form-group col-sm-12">
+							<div class="text-center form-header">
+								<h5>Basic stuffs ..</h5>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="raw">
+								<div class="input-group">
+									<input type="text" class="form-control col-sm-5 offset-sm-1 no-radius" name="firstname" id="firstnameInput" placeholder="First Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'">
+									<input type="text" class="form-control col-sm-5 no-radius" id="lastnameInput" name="lastname" placeholder="Last Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'">
+								</div>
+							</div>
+						</div>
+						<div class="form-group text-center">
+							<input id="emailInput" type="text" class="form-control no-radius text-center col-sm-10 offset-sm-1" name="email" aria-describedby="emailHelp" placeholder="Type your email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Type your email'">
+							<small id="emailHelp" class="form-text text-muted">We'll never share your mail with anyone</small>
+						</div>
+						<div class="form-group text-center">
+							<input id="passwordInput" type="password" class="form-control no-radius col-sm-10 offset-sm-1 text-center" name="password" aria-describedby="passHelp" placeholder="Choose a secret password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Choose a secret password'">
+							<small id="passHelp" class="form-text text-muted">Min 6 char. at least a capital letter, a number and no special char.</small>
+						</div>
+						<div class="form-group text-center">
+							<input id="passconfirmInput" type="password" class="form-control no-radius col-sm-10 offset-sm-1 text-center" name="passwordconfirm" placeholder="Confirm your password" onfocus="this.placeholder = ''" onblur="this.placeholder='Confirm your password'">
+						</div>
+						<div class="form-group text-center">
+							<input id="birthInput" type="text" name="birthdate" class="form-control col-lg-6 offset-lg-3 text-center col-sm-8 offset-sm-2 no-radius" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Type your birthdate: dd/mm/yyyy'" placeholder="Type your birthdate: dd/mm/yyyy">
+							<small id="birthHelp" class="form-text text-muted">You should be at least 18 to sign up</small>
+						</div>
+						<div class="form-group text-center">
+							<input id="1-to-2-button" type="button" name="submit" value="Next Step" class="sign-up-button">
 						</div>
 					</div>
-					<div class="form-group">
-						<div class="raw">
+					<div id="sign-2-wrapper">
+						<div class="form-group">
+							<div class="text-center form-header">
+								<h5>Sexual orientation</h5>
+							</div>
+						</div>
+						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control col-sm-5 offset-sm-1" name="firstname" placeholder="First Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'">
-								<input type="text" class="form-control col-sm-5" name="lastname" placeholder="Last Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'">
+								<select id="sexSelect" class="form-control no-radius col-6 col-sm-4 offset-sm-1" name="sex">
+									<option value="" disabled selected>Your are ..</option>
+									<option value="woman">a Woman</option>
+									<option value="man">a Man</option>
+								</select>
+								<select id="searchSelect" class="form-control col-6 col-sm-4 offset-sm-2" name="search">
+									<option value="" disabled selected>.. looking for</option>
+									<option value="women">Women</option>
+									<option value="men">Men</option>
+									<option value="both">Both</option>
+								</select>
 							</div>
 						</div>
+						<div class="form-group text-center">
+							<input id="2-to-1-button" type="button" name="submit" value="Prev Step" class="sign-up-button-inverse">
+							<input id="2-to-3-button" type="button" name="submit" value="Next Step" class="sign-up-button">
+						</div>
 					</div>
+					<div id="sign-3-wrapper">
+						<div class="form-group text-center">
+							<div class="text-center form-header">
+								<h5>Your tastes</h5>
+							</div>
+						</div>
+						<div class="form-group text-center">
+							<div class="raw">
+								<div class="col-5 col-xl-3 form-control check-box-wrapper no-border">
+									<input id="checkMovies" type="checkbox" name="Movies">
+										<label for="checkMovies">Cinema</label>
+								</div>
+								<div class="col-5 col-xl-3 form-control check-box-wrapper no-border">
+									<input id="checkMusic" type="checkbox" name="Music">
+										<label for="checkMusic">Music</label>
+								</div>
+								<div class="col-5 col-xl-3 form-control check-box-wrapper no-border">
+									<input id="checkSport" type="checkbox" name="Sport">
+										<label for="checkSport">Sport</label>
+								</div>
+								<div class="col-5 col-xl-3 form-control check-box-wrapper no-border">
+									<input id="checkBooks" type="checkbox" name="Books">
+										<label for="checkBooks">Books</label>
+								</div>
+								<div class="col-5 col-xl-3 form-control check-box-wrapper no-border">
+									<input id="checkFood" type="checkbox" name="Food">
+										<label for="checkFood">Food</label>
+								</div>
+								<div class="col-5 col-xl-3 form-control check-box-wrapper no-border">
+									<input id="checkBed" type="checkbox" name="Bed">
+										<label for="checkBed">Bed</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group text-center">
+							<input id="3-to-2-button" type="button" name="submit" value="Prev Step" class="sign-up-button-inverse">
+							<input id="3-to-end-button" type="submit" name="submit" value="Next Step" class="sign-up-button">
+						</div>
+					</div>
+					<div id="complete-wrapper">
 					<div class="form-group text-center">
-						<input type="text" class="form-control no-radius text-center col-sm-10 offset-sm-1" name="email" aria-describedby="emailHelp" placeholder="Type your email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Type your email'">
-						<small id="emailHelp" class="form-text text-muted">We'll never share your mail with anyone</small>
-					</div>
-					<div class="form-group text-center">
-						<input type="password" class="form-control no-radius col-sm-10 offset-sm-1 text-center" name="password" aria-describedby="passHelp" placeholder="Choose a secret password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Choose a secret password'">
-						<small id="passHelp" class="form-text text-muted">Min 6 char. at least a capital letter, a number and no special char.</small>
-					</div>
-					<div class="form-group text-center">
-						<input type="password" class="form-control no-radius col-sm-10 offset-sm-1 text-center" name="passwordconfirm" placeholder="Confirm your password" onfocus="this.placeholder = ''" onblur="this.placeholder='Confirm your password'">
-					</div>
-					<div class="form-group text-center">
-						<label>Select your birthdate</label>
-						<input type="text" name="birthdate" class="form-control col-lg-6 offset-lg-3 text-center col-sm-8 offset-sm-2" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Type your birthdate: dd/mm/yyyy'" placeholder="Type your birthdate: dd/mm/yyyy">
-						<small id="birthHelp" class="form-text text-muted">You should be at least 18 to sign up</small>
-					</div>
-					<div class="form-group text-center">
-						<input id="1-to-2-button" type="button" name="submit" value="Next Step" class="sign-up-button">
-					</div>
-				</div>
-				<div id="sign-2-wrapper">
-					<div class="form-group">
 						<div class="text-center form-header">
-							<h5>Sexual orientation</h5>
+								<h5>Last step ..</h5>
 						</div>
+						<label class="form-text">We sent you an email, follow the link inside to complete your account
 					</div>
-					<div class="form-group">
-						<div class="input-group">
-							<select class="form-control no-radius col-6 col-sm-4 offset-sm-1" name="sex">
-								<option value="" disabled selected>Your are ..</option>
-								<option value="woman">a Woman</option>
-								<option value="man">a Man</option>
-							</select>
-							<select class="form-control col-6 col-sm-4 offset-sm-2" name="search">
-								<option value="" disabled selected>.. looking for</option>
-								<option value="women">Women</option>
-								<option value="men">Men</option>
-								<option value="both">Both</option>
-							</select>
-						</div>
 					</div>
-					<div class="form-group text-center">
-						<input id="2-to-1-button" type="button" name="submit" value="Prev Step" class="sign-up-button-inverse">
-						<input id="2-to-3-button" type="button" name="submit" value="Next Step" class="sign-up-button">
-					</div>
-				</div>
-				<div id="sign-3-wrapper">
-					<div class="form-group text-center">
-						<div class="text-center form-header">
-							<h5>Your tastes</h5>
-						</div>
-					</div>
-					<div class="form-group text-center">
-						<div class="raw">
-							<div class="col-5 col-xl-3 form-control check-box-wrapper no-border">
-								<input id="check1" type="checkbox" name="Movies">
-									<label for="check1">Cinema</label>
-							</div>
-							<div class="col-5 col-xl-3 form-control check-box-wrapper no-border">
-								<input id="check2" type="checkbox" name="Music">
-									<label for="check2">Music</label>
-							</div>
-							<div class="col-5 col-xl-3 form-control check-box-wrapper no-border">
-								<input id="check3" type="checkbox" name="Sport">
-									<label for="check3">Sport</label>
-							</div>
-							<div class="col-5 col-xl-3 form-control check-box-wrapper no-border">
-								<input id="check4" type="checkbox" name="Books">
-									<label for="check4">Books</label>
-							</div>
-							<div class="col-5 col-xl-3 form-control check-box-wrapper no-border">
-								<input id="check5" type="checkbox" name="Food">
-									<label for="check5">Food</label>
-							</div>
-							<div class="col-5 col-xl-3 form-control check-box-wrapper no-border">
-								<input id="check6" type="checkbox" name="Bed">
-									<label for="check6">Bed</label>
-							</div>
-						</div>
-					</div>
-					<div class="form-group text-center">
-						<input id="3-to-2-button" type="button" name="submit" value="Prev Step" class="sign-up-button-inverse">
-						<input id="3-to-end-button" type="submit" name="submit" value="Next Step" class="sign-up-button">
-					</div>
-				</div>
-				<div id="complete-wrapper">
-
-				</div>
-			</form>
-		</fieldset>
+				</form>
+			</fieldset>
+		</div>
 	</div>
 </div>
-<div class="row">
-	<div class="col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
-		<fieldset class="form-group sign-in-form">
-			<legend class="text-center">... or log in if you have one !</legend>
-			<form action="/login" method="POST">
-				<div class="form-group text-center">
-					<input type="text" class="form-control no-radius col-sm-10 offset-sm-1 text-center" name="email" aria-describedby="emailHelp" placeholder="Type your email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Type your email'">
-				</div>
-				<div class="form-group text-center">
-					<input type="password" class="form-control no-radius col-sm-10 offset-sm-1 text-center" name="password" aria-describedby="passHelp" placeholder="Type your secret password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Type your secret password'">
-				</div>
-				<div class="form-group text-center">
-					<input type="submit" name="submit" value="Log In" class="sign-up-button">
-				</div>
-			</form>
-		</fieldset>
+<div id="sign-login-wrapper">
+	<div class="row">
+		<div class="col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
+			<fieldset class="form-group sign-in-form">
+				<div id="sign-in-title" class="text-center form-legend"><h5>... or log in if you have one !</h5></div>
+				<form action="/login" method="POST">
+					<div id="sign-input-wrapper">
+						<div class="form-group text-center">
+							<input type="text" class="form-control no-radius col-sm-10 offset-sm-1 text-center" name="email" aria-describedby="emailHelp" placeholder="Type your email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Type your email'">
+						</div>
+						<div class="form-group text-center">
+							<input type="password" class="form-control no-radius col-sm-10 offset-sm-1 text-center" name="password" aria-describedby="passHelp" placeholder="Type your secret password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Type your secret password'">
+						</div>
+						<div class="form-group text-center">
+							<input type="submit" name="submit" value="Log In" class="sign-up-button">
+						</div>
+					</div>
+				</form>
+			</fieldset>
+		</div>
 	</div>
 </div>
 {% endblock %}
 
 {% block script %}
 		<script>
+		$('#create-form').on('submit', function(e) {
+			e.preventDefault();
+			createReq = new XMLHttpRequest();
+			createReq.open('POST', '/create');
+			createReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			createReq.onreadystatechange = function() {
+				if (createReq.readyState == 4 && createReq.status == 200) {
+					console.log(createReq.responseText);
+					if (createReq.responseText !== 'success') {
+						$('#modalMessage').text(createReq.responseText);
+						$('#myModal').modal('show');
+					} else {
+						$('#sign-3-wrapper').hide();
+						$('#complete-wrapper').show();
+					}
+				}
+			}
+			var firstname = $('#firstnameInput').val();
+			var lastname = $('#lastnameInput').val();
+			var email = $('#emailInput').val();
+			var password = $('#passwordInput').val();
+			var passconfirm = $('#passconfirmInput').val();
+			var birthdate = $('#birthInput').val();
+			var sex = $('#sexSelect').val();
+			var search = $('#searchSelect').val();
+			var movies = ($('#checkMovies').prop('checked')) ? 'on' : 'off';
+			var music = ($('#checkMusic').prop('checked')) ? 'on' : 'off';
+			var sport = ($('#checkSport').prop('checked')) ? 'on' : 'off';
+			var books = ($('#checkBooks').prop('checked')) ? 'on' : 'off';
+			var food = ($('#checkFood').prop('checked')) ? 'on' : 'off';
+			var bed = ($('#checkBed').prop('checked')) ? 'on' : 'off';
+			createReq.send('firstname='+firstname+'&lastname='+lastname+'&email='+email+'&password='+password+'&passconfirm='+passconfirm+'&birthdate='+birthdate+'&sex='+sex+'&search='+search+'&music='+music+'&movies='+movies+'&sport='+sport+'&books='+books+'&food='+food+'&bed='+bed);
+		});
+		$('.check-box-wrapper').map(function(idx, data) {
+			$(data).on('click', data, function() {
+				if ($($(data).children()[0]).prop('checked') === true) {
+					$($(data).children()[0]).prop('checked', false);
+				} else {
+					$($(data).children()[0]).prop('checked', true);
+				}
+			});
+		});
+		$(document).ready(function(){
+			$("#sign-1-wrapper input").filter(":text").keydown( function(event) {
+				if (event.keyCode==13) {
+					event.preventDefault();
+					$('#1-to-2-button').click();
+				}
+			});
+		});
+			$(document).ready(function(){
+			$("#sign-1-wrapper input").filter(":password").keydown( function(event) {
+				if (event.keyCode==13) {
+					event.preventDefault();
+					$('#1-to-2-button').click();
+				}
+			});
+		});
+		$(document).ready(function(){
+			$("#sign-2-wrapper input").filter(":text").keydown( function(event) {
+				if (event.keyCode==13) {
+					event.preventDefault();
+					$('#2-to-3-button').click();
+				}
+			});
+		});
+		$(document).ready(function(){
+			$("#sign-2-wrapper input").filter(":password").keydown( function(event) {
+				if (event.keyCode==13) {
+					event.preventDefault();
+					$('#2-to-3-button').click();
+				}
+			});
+		});
+		function changeForm() {
+			$('#sign-up-form-wrapper').hide();
+				$('#sign-in-title h5').text('log in');
+				$('#only-login-button').val('Create an account');
+				$('#only-login-button').on('click', function() {
+					$('#sign-up-form-wrapper').show();
+					$('#only-login-button').val('Already have an account ? Log in now !');
+					$('#only-login-button').on('click', changeForm);
+					$('#sign-in-title h5').text('.. or log in if you have one');
+				});
+		}
+			$('#only-login-button').on('click', changeForm);
 			$('#1-to-2-button').on('click', function() {
-				$('#sign-1-wrapper').hide();
-				$('#sign-2-wrapper').show();
-				$('#step-1-pro').prop('class', 'complete');
-				$('#step-2-pro').prop('class', 'active');
+				var firstname = $('#firstnameInput').val();
+				var lastname = $('#lastnameInput').val();
+				var email = $('emailInput').val();
+				var password = $('#passwordInput').val();
+				var passconfirm = $('#passconfirmInput').val();
+				var birthdate = $('#birthInput').val();
+				if (firstname === '') {
+					$('#modalMessage').text('Fill username');
+					$('#myModal').modal('show');
+				} else if (lastname === '') {
+					$('#modalMessage').text('Fill lastname');
+					$('#myModal').modal('show');
+				} else if (email === '') {
+					$('#modalMessage').text('Fill email');
+					$('#myModal').modal('show');
+				} else if (password === '') {
+					$('#modalMessage').text('Fill password');
+					$('#myModal').modal('show');
+				} else if (passconfirm === '') {
+					$('#modalMessage').text('Fill password confirmation');
+					$('#myModal').modal('show');
+				} else if (birthdate === '') {
+					$('#modalMessage').text('Fill birthdate');
+					$('#myModal').modal('show');
+				} else if (birthdate.search(/(\d{1,2})\/(\d{1,2})\/(\d{4})/) == -1) {
+					$('#modalMessage').text('Follow the date format : dd/mm/yyyy');
+					$('#myModal').modal('show');
+				} else {
+					$('#sign-1-wrapper').hide();
+					$('#sign-2-wrapper').show();
+					$('#step-1-pro').prop('class', 'complete');
+					$('#step-2-pro').prop('class', 'active');
+				}
 			});
 			$('#2-to-1-button').on('click', function() {
 				$('#sign-2-wrapper').hide();

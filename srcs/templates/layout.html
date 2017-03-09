@@ -25,7 +25,6 @@
 			</div>
 		</div>
 		{% if session.get('logged_in') == True and session.get('verify') == None %}
-			{% block navbar %}
 		<nav class="nav main-nav">
 		  <div class="main-nav-item nav-item">
 		    <a class="main-nav-link nav-link" href="/">Home</a>
@@ -39,7 +38,12 @@
 		  <div class="nav-item main-nav-item">
 		    <a class="main-nav-link nav-link" href="/logout">Logout</a>
 		</nav>
-			{% endblock %}
+		{% else %}
+				<nav class="nav main-nav">
+					<div class="nav-item">
+				 		<a class="nav-link"><input id="only-login-button" type="button" name="submit" value="Already have an account ? Log in now !" class="sign-up-button"></a>
+					</div>
+				</nav>
 		{% endif %}
 	</div>
 	<div id="mainWrapper" class="container-fluid">
