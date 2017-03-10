@@ -330,8 +330,12 @@ input:focus {
 }
 
 
-.profile-main-pictue {
-	padding: 1rem;
+.profile-main-picture {
+	border: 3px solid #ff4d4d;
+	padding: 0.2rem;
+}
+.profile-main-picture:hover {
+	box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .button-container:hover > .edit-button-wrapper, .button-container:focus > .edit-button-wrapper {
@@ -364,9 +368,13 @@ input:focus {
 }
 */
 
+.post-picture {
+	border: 2px solid rgba(255, 77, 77, 0.5);
+}
 
-.profile-picture {
-	padding: 1rem;
+.post-picture:hover {
+	border: 2px solid #ff4d4d;
+	box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -442,6 +450,11 @@ img {
 	width: 200%;
 }
 
+.present_users {
+	border: 2px solid rgba(255, 77, 77, 0.5);
+	margin-top: 1rem;
+}
+
 .present_users_infos {
 	z-index: 10;
 	width: 100%;
@@ -451,6 +464,11 @@ img {
 	left: 0px;
 	display: none;
 	background-color: rgba(255, 255, 255, 0.8);
+}
+
+.present_users:hover {
+	box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
+	border: 2px solid #ff4d4d;
 }
 
 .present_users:hover  .present_users_infos {
@@ -469,10 +487,51 @@ img {
 .edit-button-wrapper {
 	display:none;
 	position: absolute;
-	background: transparent;
+	border: 2px solid #ff4d4d;
 	right: 1rem;
+	background: linear-gradient(to bottom, #ff4d4d 50%, transparent 50%);
+	background-size: 100% 200%;
+	background-position: bottom left;
+	transition: all 0.2s;
+	/*color: white;*/
 	top: 1rem;
+}
 
+.edit-button-wrapper:hover {
+	background-position: top left;
+}
+
+.edit-button-wrapper:hover > .edit-button {
+	color: white;
+}
+
+#edit-profile {
+	margin-top: 2.5rem;
+}
+
+#proposals-wrapper {
+	margin-top: 2rem;
+}
+
+#your-photos-wrapper {
+	margin-top: 2.5rem;
+}
+
+#posts-wrapper {
+	margin-top: 2.8rem;
+}
+
+#present-profile {
+	margin-top: 2rem;
+}
+
+.profile-infos {
+	border: 3px solid #ff4d4d;
+	margin-top: 1rem;
+}
+
+.profile-infos:hover {
+	box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .posts_class {
@@ -510,6 +569,7 @@ body {
 
 .edit-button {
 	background: transparent;
+	color: #ff4d4d;
 	border: none;
 }
 
@@ -547,6 +607,7 @@ body {
 	font-family: 'Manifesto';
 	src: url('fonts/MANIFESTO.ttf');
 }
+
 
 .button-centred {
 	position: absolute;

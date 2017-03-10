@@ -2,7 +2,7 @@
 {% block content %}
 <div class="row">
 	<div class="col-xs-12 col-md-10 offset-md-1 text-center">
-		<h3>Who's here ?</h3>
+		<div class="form-legend"><h4>Who's here ?</h4></div>
 		<div id="proposals-wrapper" class="row">
 		{% for item in posts %}
 			<div id="{{item['id']}}" class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -10,9 +10,9 @@
 					<div class="present_users_infos">
 						<p class="present_users_text card-text">By {{item['username']}}</p>
 						<div class="card-block present-button-wrapper text-center">
-								<button class="btn btn-default like_button" onclick="sendALike({{item['user_id']}}, {{item['id']}});"><i class="fa fa-heart" aria-hidden="true"></i></button>
+								<button class="btn btn-default like_button no-radius" onclick="sendALike({{item['user_id']}}, {{item['id']}});"><i class="fa fa-heart" aria-hidden="true"></i></button>
 							<a href="/user/{{item['user_id']}}">
-								<button class="btn btn-default profile_button"><i class="fa fa-user" aria-hidden="true"></i></button>
+								<button class="btn btn-default profile_button no-radius"><i class="fa fa-user" aria-hidden="true"></i></button>
 							</a>
 						</div>
 					</div>
@@ -28,11 +28,6 @@
 			</div>
 		{% endfor %}
 		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-xs-12 col-md-10 offset-md-1 text-center">
-		<h3>Your Matches</h3>
 	</div>
 </div>
 {% endblock %}

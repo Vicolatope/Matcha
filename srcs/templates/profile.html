@@ -2,7 +2,7 @@
 {% block content %}
 <div class="row">
 	<div class="col-md-4 col-sm-6 col-xs-6 offset-md-1 col-lg-4">
-		<div class="card button-container no-radius profile-main-pictue">
+		<div class="card button-container no-radius profile-main-picture">
 			<img type="image/png" class="picture-profile img-fluid no-radius card-img-top" src="{{profileImage}}">
 			<div class="card-block-overlay text-center edit-button-wrapper" id="changePictureButton">
 				<button class="btn text-center no-radius edit-button"><i id="changePictureIcon" class="fa fa-pencil" aria-hidden="true"></i></button>
@@ -10,8 +10,8 @@
 		</div>
 	</div>
 	<div class="col-md-6 col-sm-6 col-xs-6">
-		<div class="card button-container no-radius">
-			<h3 class="card-title text-center">Profile infos</h3>
+		<div class="card button-container no-radius profile-infos">
+			<div class="form-legend"><h5 class="card-title text-center">Profile infos</h5></div>
 			<div id="present-profile">
 				<div class="card-block">
 					<div class="text-center">
@@ -50,10 +50,12 @@
 		</div>
 	</div>
 </div>
-<div class="row">
-	<div class="col-xs-12 col-md-10 offset-md-1 text-center">
-		<h3>Your photos</h3>
-		<div id="posts-wrapper" class="row">
+<div id="your-photos-wrapper">
+	<div class="row">
+		<div class="col-xs-12 col-md-10 offset-md-1 text-center">
+			<div class="form-legend"><h4>Your photos</h4></div>
+			<div id="posts-wrapper" class="row">
+			</div>
 		</div>
 	</div>
 </div>

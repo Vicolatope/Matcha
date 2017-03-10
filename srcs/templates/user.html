@@ -2,13 +2,13 @@
 {% block content %}
 <div class="row">
 	<div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
-		<h3>{{username}}</h3>
+		<div class="form-legend"><h4>{{username}}</h4></div>
 		<div class="card no-radius">
 			<img type="image/png" class="picture-profile img-fluid no-radius card-img-top" src="/image/{{profileImage}}">
 		</div>
 	</div>
 	<div class="col-md-10 col-xs-12 offset-md-1 text-center user-photos-wrapper">
-		<h3>{{username}}'s photos</h3>
+		<div class="form-legend"><h4>{{username}}'s photos</h4></div>
 		{% block photos %}
 			{% for item in posts %}
 				<div class="col-sm-4 col-xs-4 col-lg-4">
